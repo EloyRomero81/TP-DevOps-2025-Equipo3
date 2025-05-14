@@ -1,7 +1,7 @@
 
 from peewee import *
 
-myDB = SqliteDatabase("database.sqlite", pragmas={"foreign_keys": 1}) #Se indica la BD con la que se trabajará y se enforza las restricciones de claves foráneas.
+myDB = SqliteDatabase("app/database.sqlite", pragmas={"foreign_keys": 1}) #Se indica la BD con la que se trabajará y se enforza las restricciones de claves foráneas.
 
 class BaseModel(Model):
     class Meta:

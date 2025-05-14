@@ -1,8 +1,8 @@
 from fastapi import APIRouter, HTTPException
-from modelos.modeloAlumnoMateria import ModeloCrearAlumnoMateria, ModeloActualizarAlumnoMateria
+from app.modelos.modeloAlumnoMateria import ModeloCrearAlumnoMateria, ModeloActualizarAlumnoMateria
 from .alumnos import buscarAlumno
 from .materias import buscarMateria
-from database import Alumno_Materia, Alumno, Materia
+from app.database import Alumno_Materia, Alumno, Materia
 
 router = APIRouter()
 

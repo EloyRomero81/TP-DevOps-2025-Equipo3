@@ -1,7 +1,7 @@
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
-from rutas import alumnos, profesores, materias, alumno_materia
-from database import myDB 
+from .rutas import alumnos, profesores, materias, alumno_materia
+from .database import myDB 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -22,3 +22,7 @@ app.include_router(alumno_materia.router)
 @app.get("/")
 def index():
     return {"message": "Bienvenido a la API de notas de estudiantes"}
+
+@app.get("/health")
+def health_check():
+    return {"status": "ok"}

@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException
-from modelos.modeloProfesor import ModeloCrearProfesor, ModeloActualizarProfesor
-from database import Profesor
+from app.modelos.modeloProfesor import ModeloCrearProfesor, ModeloActualizarProfesor
+from app.database import Profesor
 
 router = APIRouter()
 
@@ -43,6 +43,6 @@ def actualizar_profesor(id_request: int, profesor_actualizado: ModeloActualizarP
 
 @router.delete("/profesor/{id}", tags=["Profesor"])
 def delete_profesor(id_request: int):
-    profesor = buscarProfesor(id_request)
+    profesor = buscarProfesor(id_request) #Seguro salta error si se elimina un profe relacionado una materia
     profesor.delete_instance()
     return "Profesor eliminado"
