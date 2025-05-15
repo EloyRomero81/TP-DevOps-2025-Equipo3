@@ -27,21 +27,21 @@ def get_alumnos():
     return [alumno.__data__ for alumno in alumnos] #Convierte cada objeto Peewee en diccionario
 
 @router.get("/alumno/{id}", tags=["Alumno"])
-def get_alumno(id_request: int):
-    alumno = buscarAlumno(id_request)
+def get_alumno(id: int):
+    alumno = buscarAlumno(id)
     return alumno
 
 @router.put("/alumno/{id}", tags=["Alumno"])
-def actualizar_alumno(id_request: int, alumno_actualizado: ModeloActualizarAlumno):
-    alumno = buscarAlumno(id_request)
+def actualizar_alumno(id: int, alumno_actualizado: ModeloActualizarAlumno):
+    alumno = buscarAlumno(id)
     alumno.nombre_alumno = alumno_actualizado.nombre_alumno
     alumno.apellido_alumno = alumno_actualizado.apellido_alumno
     alumno.save()
     return {"mensaje": "Alumno actualizado", "alumno": alumno.__data__}
 
 @router.delete("/alumno/{id}", tags=["Alumno"])
-def delete_alumno(id_request: int):
-    alumno = buscarAlumno(id_request)
-    Alumno_Materia.delete().where(Alumno_Materia.id_alumno == id_request).execute() #Elimina el registro en Alumno-Materia si es que hay
+def delete_alumno(id: int):
+    alumno = buscarAlumno(id)
+    Alumno_Materia.delete().where(Alumno_Materia.id_alumno == id).execute() #Elimina el registro en Alumno-Materia si es que hay
     alumno.delete_instance()
     return "Alumno eliminado"

@@ -1,14 +1,18 @@
-
 from peewee import *
 
 myDB = SqliteDatabase("app/database.sqlite", pragmas={"foreign_keys": 1}) #Se indica la BD con la que se trabajará y se enforza las restricciones de claves foráneas.
+db_prueba = SqliteDatabase("file:memdb1?mode=memory&cache=shared", uri=True, pragmas={"foreign_keys": 1}, check_same_thread=False) #Para testeo
 
 class BaseModel(Model):
     class Meta:
         database = myDB
 
-#Se define la estructura que tiene la BD
+#Función para cambiar la base de datos (para testeo)
+def set_database(new_db):
+    for model in [Alumno, Alumno_Materia, Materia, Profesor]:
+        model._meta.database = new_db
 
+#Se define la estructura que tiene la BD
 class Alumno(BaseModel):
     id_alumno = IntegerField(primary_key=True)
     nombre_alumno = CharField(max_length=50)
