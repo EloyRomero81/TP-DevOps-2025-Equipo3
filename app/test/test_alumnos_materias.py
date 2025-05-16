@@ -81,7 +81,6 @@ def test_obtener_todos_alumnos_materias(client):
     assert data["2"]["Nombre Materia"] == "Lengua"
     assert data["2"]["Alumnos"][0]["Nombre y Apellido Alumno"] == "Roberto Juanes"
     assert data["2"]["Alumnos"][1]["Nombre y Apellido Alumno"] == "Alejandro Lernes"
-    
 
 def test_obtener_materias_de_alumno(client):
     crearProfe(client,3,"Enrique","Sosa")
