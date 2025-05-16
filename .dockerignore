@@ -1,0 +1,23 @@
+# Evita subir archivos temporales y de entorno
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite
+*.sqlite3
+.env
+.env.*
+
+# Archivos de configuración locales
+*.log
+
+# VCS
+.git
+.gitignore
+
+# Otros
+*.DS_Store
+.vscode/
+.idea/
+tests/
