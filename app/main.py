@@ -20,7 +20,3 @@ app.include_router(alumno_materia.router)
 @app.get("/")
 def index():
     return {"message": "Bienvenido a la API de notas de estudiantes"}
-
-@app.get("/health")
-def health_check():
-    return {"status": "ok"}

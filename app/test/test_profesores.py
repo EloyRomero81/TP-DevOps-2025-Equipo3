@@ -111,3 +111,4 @@ def test_eliminar_profesor_inexistente(client):
     response = client.delete("/profesor/1")
     assert response.status_code == status.HTTP_404_NOT_FOUND
     assert response.json()["detail"] == "Profesor no encontrado"
+    

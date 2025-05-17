@@ -1,0 +1,30 @@
+name: CI para Desarrollo
+
+on:
+  push:
+    branches: [ dev-api ]
+
+jobs:
+  test-lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repositorio
+        uses: actions/checkout@v3
+
+      - name: Configuración de Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Instalación de dependencias
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest flake8
+
+      - name: Ejecución de tests
+        run: pytest
+
+      - name: Ejecución de linter
+        run: flake8 app
