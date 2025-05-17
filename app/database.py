@@ -50,8 +50,9 @@ class Materia(BaseModel):
     id_profesor = ForeignKeyField(
         Profesor, backref="materia", column_name="id_profesor"
     )  # backref crea un acceso inverso desde Profesor hacia Materia.
-    # Peewee por defecto genera el nombre del campo como id_profesor_id en la base de datos,
-    # no como id_profesor. Por eso se lo cambia con column_name.
+    # Peewee por defecto genera el nombre del campo como 
+    # id_profesor_id en la base de datos, no como id_profesor.
+    # Por eso se lo cambia con column_name.
 
 
 class Alumno_Materia(BaseModel):
