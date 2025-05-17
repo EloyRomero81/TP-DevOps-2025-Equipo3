@@ -206,7 +206,7 @@ def actualizar_alumno_materia(
     if not relacion:
         raise HTTPException(
             status.HTTP_404_NOT_FOUND,
-            "Inscripción alumno-materia no encontrada.",
+            "Inscripción alumno-materia no encontrada",
         )
 
     if alumno_materia_actualizado.nota_parcial1 is not None:
