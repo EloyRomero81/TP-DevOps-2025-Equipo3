@@ -19,7 +19,8 @@ router = APIRouter()
 )
 def crear_alumno_materia(
     alumno_materia_request: ModeloCrearAlumnoMateria,
-):  # Se pedira un body con los datos definidos en el modelo de crear alumno_materia
+):  # Se pedira un body con los datos definidos 
+    # en el modelo de crear alumno_materia
     buscarMateria(alumno_materia_request.id_materia)
     buscarAlumno(alumno_materia_request.id_alumno)
     alumno_materia_request = Alumno_Materia.create(
@@ -64,7 +65,8 @@ def get_alumnos_materias():
 
         if (
             materia.id_materia not in resultado
-        ):  # La primera vez que aparece la materia se inicializa su nombre y el listado de alumnos
+        ):  # La primera vez que aparece la materia se inicializa
+            # su nombre y el listado de alumnos
             resultado[materia.id_materia] = {
                 "Nombre Materia": materia.nombre_materia,
                 "Alumnos": [],
@@ -162,7 +164,8 @@ def get_materia_alumno(id_materia_request: int):
 
         if (
             materia.id_materia not in resultado
-        ):  # La primera vez que aparece la materia se inicializa su nombre y el listado de alumnos
+        ):  # La primera vez que aparece la materia se inicializa
+            # su nombre y el listado de alumnos
             resultado[materia.id_materia] = {
                 "Nombre Materia": materia.nombre_materia,
                 "Alumnos": [],
@@ -203,7 +206,7 @@ def actualizar_alumno_materia(
     if not relacion:
         raise HTTPException(
             status.HTTP_404_NOT_FOUND,
-            "Inscripción alumno-materia no encontrada. (No hay inscripción para el alumno en la materia)",
+            "Inscripción alumno-materia no encontrada.",
         )
 
     if alumno_materia_actualizado.nota_parcial1 is not None:

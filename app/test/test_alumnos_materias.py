@@ -1,7 +1,6 @@
 import pytest
 from fastapi.testclient import TestClient
 from starlette import status
-from typing import Optional
 from app.database import (
     Materia,
     Profesor,
@@ -135,9 +134,9 @@ def test_obtener_materias_de_alumno(client):
     assert data["1"]["Nombre Alumno"] == "Roberto"
     assert data["1"]["Apellido Alumno"] == "Juanes"
     assert data["1"]["Materias"][0]["Nombre Materia"] == "Matematica"
-    assert data["1"]["Materias"][0]["Nota parcial 1"] == None
+    assert data["1"]["Materias"][0]["Nota parcial 1"] is None
     assert data["1"]["Materias"][1]["Nombre Materia"] == "Lengua"
-    assert data["1"]["Materias"][1]["Nota Final"] == None
+    assert data["1"]["Materias"][1]["Nota Final"] is None
 
 
 def test_obtener_alumnos_de_materia(client):
@@ -236,7 +235,7 @@ def test_actualizar_inscripcion_inexistente(client):
     assert response.status_code == status.HTTP_404_NOT_FOUND
     assert (
         response.json()["detail"]
-        == "Inscripción alumno-materia no encontrada. (No hay inscripción para el alumno en la materia)"
+        == "Inscripción alumno-materia no encontrada"
     )
 
 

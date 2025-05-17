@@ -22,9 +22,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install pytest flake8 black
-          
+
       - name: Formatear código con black
-        run: black --line-length 79 .
+        run: black --line-length 79 app
 
       - name: Ejecución de tests
         run: pytest
