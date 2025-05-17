@@ -1,4 +1,4 @@
-name: Build y Deploy en Pull Request
+name: Build y Deploy
  
 on:
   push:
