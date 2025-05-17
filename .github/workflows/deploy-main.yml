@@ -52,4 +52,3 @@ jobs:
           push: true
           tags: |
             ${{ secrets.DOCKER_USERNAME }}/tp-devops-2025:main
-            ${{ secrets.DOCKER_USERNAME }}/tp-devops-2025:latest
