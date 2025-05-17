@@ -129,7 +129,8 @@ def test_obtener_profesor_por_id_vacio(client):
 
 def test_actualizar_profesor_inexistente(client):
     response = client.put(
-        "/profesor/1", json={"nombre_profesor": "Juan", "apellido_profesor": "Roberto"}
+        "/profesor/1",
+        json={"nombre_profesor": "Juan", "apellido_profesor": "Roberto"},
     )
     assert response.status_code == status.HTTP_404_NOT_FOUND
     assert response.json()["detail"] == "Profesor no encontrado"

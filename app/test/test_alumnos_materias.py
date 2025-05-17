@@ -107,10 +107,17 @@ def test_obtener_todos_alumnos_materias(client):
     assert isinstance(data, dict)
     assert len(data) == 2
     assert data["1"]["Nombre Materia"] == "Matematica"
-    assert data["1"]["Alumnos"][0]["Nombre y Apellido Alumno"] == "Roberto Juanes"
+    assert (
+        data["1"]["Alumnos"][0]["Nombre y Apellido Alumno"] == "Roberto Juanes"
+    )
     assert data["2"]["Nombre Materia"] == "Lengua"
-    assert data["2"]["Alumnos"][0]["Nombre y Apellido Alumno"] == "Roberto Juanes"
-    assert data["2"]["Alumnos"][1]["Nombre y Apellido Alumno"] == "Alejandro Lernes"
+    assert (
+        data["2"]["Alumnos"][0]["Nombre y Apellido Alumno"] == "Roberto Juanes"
+    )
+    assert (
+        data["2"]["Alumnos"][1]["Nombre y Apellido Alumno"]
+        == "Alejandro Lernes"
+    )
 
 
 def test_obtener_materias_de_alumno(client):
@@ -146,8 +153,12 @@ def test_obtener_alumnos_de_materia(client):
     assert isinstance(data, dict)
     assert len(data) == 1
     assert data["1"]["Nombre Materia"] == "Matematica"
-    assert data["1"]["Alumnos"][0]["Nombre y Apellido Alumno"] == "Roberto Juanes"
-    assert data["1"]["Alumnos"][1]["Nombre y Apellido Alumno"] == "Juan Domingo"
+    assert (
+        data["1"]["Alumnos"][0]["Nombre y Apellido Alumno"] == "Roberto Juanes"
+    )
+    assert (
+        data["1"]["Alumnos"][1]["Nombre y Apellido Alumno"] == "Juan Domingo"
+    )
 
 
 def test_actualizar_notas_alumno_materia(client):
@@ -188,7 +199,10 @@ def test_eliminar_inscripcion_alumno_materia(client):
 def test_obtener_todos_alumnos_materias_vacio(client):
     response = client.get("/alumnos-materias")
     assert response.status_code == status.HTTP_404_NOT_FOUND
-    assert response.json()["detail"] == "Inscripciones Alumno-Materia no encontrados"
+    assert (
+        response.json()["detail"]
+        == "Inscripciones Alumno-Materia no encontrados"
+    )
 
 
 def test_obtener_inscripcion_inexistente_con_alumno(client):
@@ -207,7 +221,8 @@ def test_obtener_inscripcion_inexistente_con_materia(client):
     response = client.get("/alumno-materia/materia/4")
     assert response.status_code == status.HTTP_404_NOT_FOUND
     assert (
-        response.json()["detail"] == "No se encontraron alumnos incriptos a la materia"
+        response.json()["detail"]
+        == "No se encontraron alumnos incriptos a la materia"
     )
 
 
@@ -231,4 +246,6 @@ def test_eliminar_inscripcion_inexistente(client):
     crearAlumno(client, 1, "Juan", "Domingo")
     response = client.delete("/alumno-materia/1/2")
     assert response.status_code == status.HTTP_404_NOT_FOUND
-    assert response.json()["detail"] == "Inscripción Alumno-Materia no encontrada"
+    assert (
+        response.json()["detail"] == "Inscripción Alumno-Materia no encontrada"
+    )

@@ -13,7 +13,9 @@ router = APIRouter()
 
 # CREAR INSCRIPCION
 @router.post(
-    "/alumno-materia", tags=["Alumno-Materia"], status_code=status.HTTP_201_CREATED
+    "/alumno-materia",
+    tags=["Alumno-Materia"],
+    status_code=status.HTTP_201_CREATED,
 )
 def crear_alumno_materia(
     alumno_materia_request: ModeloCrearAlumnoMateria,
@@ -32,7 +34,9 @@ def crear_alumno_materia(
 
 # OBTENER TODOS LOS ALUMNOS DE TODAS LAS MATERIAS
 @router.get(
-    "/alumnos-materias", tags=["Alumno-Materia"], status_code=status.HTTP_200_OK
+    "/alumnos-materias",
+    tags=["Alumno-Materia"],
+    status_code=status.HTTP_200_OK,
 )
 def get_alumnos_materias():
     alumnos_materias = (
@@ -49,7 +53,8 @@ def get_alumnos_materias():
     )
     if not alumnos_materias:
         raise HTTPException(
-            status.HTTP_404_NOT_FOUND, "Inscripciones Alumno-Materia no encontrados"
+            status.HTTP_404_NOT_FOUND,
+            "Inscripciones Alumno-Materia no encontrados",
         )
 
     resultado = {}
@@ -214,7 +219,8 @@ def actualizar_alumno_materia(
 
 # ELIMINAR INSCRIPCION
 @router.delete(
-    "/alumno-materia/{id_alumno_request}/{id_materia_request}", tags=["Alumno-Materia"]
+    "/alumno-materia/{id_alumno_request}/{id_materia_request}",
+    tags=["Alumno-Materia"],
 )
 def delete_alumno_materia(id_alumno_request: int, id_materia_request: int):
     buscarAlumno(id_alumno_request)
@@ -229,7 +235,8 @@ def delete_alumno_materia(id_alumno_request: int, id_materia_request: int):
     )
     if not alumno_materia:
         raise HTTPException(
-            status.HTTP_404_NOT_FOUND, "Inscripción Alumno-Materia no encontrada"
+            status.HTTP_404_NOT_FOUND,
+            "Inscripción Alumno-Materia no encontrada",
         )
     alumno_materia.delete_instance()
     return "Relacion Alumno-Materia eliminada"

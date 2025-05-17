@@ -1,4 +1,12 @@
-from peewee import *
+from peewee import (
+    SqliteDatabase,
+    Model,
+    IntegerField,
+    CharField,
+    ForeignKeyField,
+    CompositeKey,
+)
+
 
 myDB = SqliteDatabase(
     "app/database.sqlite", pragmas={"foreign_keys": 1}
@@ -45,8 +53,12 @@ class Materia(BaseModel):
 
 
 class Alumno_Materia(BaseModel):
-    id_alumno = ForeignKeyField(Alumno, backref="notas", column_name="id_alumno")
-    id_materia = ForeignKeyField(Materia, backref="notas", column_name="id_materia")
+    id_alumno = ForeignKeyField(
+        Alumno, backref="notas", column_name="id_alumno"
+    )
+    id_materia = ForeignKeyField(
+        Materia, backref="notas", column_name="id_materia"
+    )
     nota_parcial1 = IntegerField(null=True)
     nota_parcial2 = IntegerField(null=True)
     nota_final = IntegerField(null=True)

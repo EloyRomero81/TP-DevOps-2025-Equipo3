@@ -55,7 +55,11 @@ def test_crear_materia(client):
     crearProfe(client, 3, "Enrique", "Sosa")
     response = client.post(
         "/materia",
-        json={"id_materia": 1, "nombre_materia": "Matematica", "id_profesor": 3},
+        json={
+            "id_materia": 1,
+            "nombre_materia": "Matematica",
+            "id_profesor": 3,
+        },
     )
     assert response.status_code == status.HTTP_201_CREATED
     data = response.json()["__data__"]

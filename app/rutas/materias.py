@@ -1,6 +1,9 @@
 from fastapi import APIRouter, HTTPException
 from starlette import status
-from app.modelos.modeloMateria import ModeloCrearMateria, ModeloActualizarMateria
+from app.modelos.modeloMateria import (
+    ModeloCrearMateria,
+    ModeloActualizarMateria,
+)
 from .profesores import buscarProfesor
 from app.database import Materia, Alumno_Materia
 
@@ -31,7 +34,9 @@ def crear_materia(
 def get_materias():
     materias = Materia.select()
     if not materias:
-        raise HTTPException(status.HTTP_404_NOT_FOUND, "No se encontraron materias")
+        raise HTTPException(
+            status.HTTP_404_NOT_FOUND, "No se encontraron materias"
+        )
     return [
         materia.__data__ for materia in materias
     ]  # Convierte cada objeto Peewee en diccionario
@@ -60,7 +65,9 @@ def actualizar_materia(id: int, materia_actualizado: ModeloActualizarMateria):
     return {"mensaje": "Materia actualizada", "Materia": materia.__data__}
 
 
-@router.delete("/materia/{id}", tags=["Materia"], status_code=status.HTTP_200_OK)
+@router.delete(
+    "/materia/{id}", tags=["Materia"], status_code=status.HTTP_200_OK
+)
 def delete_materia(id: int):
     materia = buscarMateria(id)
     Alumno_Materia.delete().where(

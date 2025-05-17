@@ -29,7 +29,9 @@ def crear_alumno(
 def get_alumnos():
     alumnos = Alumno.select()
     if not alumnos:
-        raise HTTPException(status.HTTP_404_NOT_FOUND, "No se encontraron alumnos")
+        raise HTTPException(
+            status.HTTP_404_NOT_FOUND, "No se encontraron alumnos"
+        )
     return [
         alumno.__data__ for alumno in alumnos
     ]  # Convierte cada objeto Peewee en diccionario

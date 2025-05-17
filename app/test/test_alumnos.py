@@ -1,7 +1,14 @@
 import pytest
 from fastapi.testclient import TestClient
 from starlette import status
-from app.database import Alumno, Alumno_Materia, Materia, set_database, db_prueba, myDB
+from app.database import (
+    Alumno,
+    Alumno_Materia,
+    Materia,
+    set_database,
+    db_prueba,
+    myDB,
+)
 from app.main import app
 
 
@@ -24,7 +31,11 @@ def client():
 def test_crear_alumno(client):
     response = client.post(
         "/alumno",
-        json={"id_alumno": 1, "nombre_alumno": "Juan", "apellido_alumno": "Pérez"},
+        json={
+            "id_alumno": 1,
+            "nombre_alumno": "Juan",
+            "apellido_alumno": "Pérez",
+        },
     )
     assert response.status_code == status.HTTP_201_CREATED
     data = response.json()["__data__"]
@@ -36,11 +47,19 @@ def test_crear_alumno(client):
 def test_obtener_todos_alumnos(client):
     client.post(
         "/alumno",
-        json={"id_alumno": 1, "nombre_alumno": "Juan", "apellido_alumno": "Pérez"},
+        json={
+            "id_alumno": 1,
+            "nombre_alumno": "Juan",
+            "apellido_alumno": "Pérez",
+        },
     )
     client.post(
         "/alumno",
-        json={"id_alumno": 2, "nombre_alumno": "Ana", "apellido_alumno": "Gómez"},
+        json={
+            "id_alumno": 2,
+            "nombre_alumno": "Ana",
+            "apellido_alumno": "Gómez",
+        },
     )
     response = client.get("/alumnos")
     assert response.status_code == status.HTTP_200_OK
@@ -54,7 +73,11 @@ def test_obtener_todos_alumnos(client):
 def test_obtener_alumno_por_id(client):
     client.post(
         "/alumno",
-        json={"id_alumno": 2, "nombre_alumno": "Ana", "apellido_alumno": "Gómez"},
+        json={
+            "id_alumno": 2,
+            "nombre_alumno": "Ana",
+            "apellido_alumno": "Gómez",
+        },
     )
     response = client.get("/alumno/2")
     assert response.status_code == status.HTTP_200_OK
@@ -66,10 +89,15 @@ def test_obtener_alumno_por_id(client):
 def test_actualizar_alumno(client):
     client.post(
         "/alumno",
-        json={"id_alumno": 3, "nombre_alumno": "Carlos", "apellido_alumno": "Sosa"},
+        json={
+            "id_alumno": 3,
+            "nombre_alumno": "Carlos",
+            "apellido_alumno": "Sosa",
+        },
     )
     response = client.put(
-        "/alumno/3", json={"nombre_alumno": "Carlos A.", "apellido_alumno": "Sosa B."}
+        "/alumno/3",
+        json={"nombre_alumno": "Carlos A.", "apellido_alumno": "Sosa B."},
     )
     assert response.status_code == status.HTTP_200_OK
     data = response.json()["alumno"]
@@ -80,7 +108,11 @@ def test_actualizar_alumno(client):
 def test_eliminar_alumno(client):
     client.post(
         "/alumno",
-        json={"id_alumno": 4, "nombre_alumno": "Laura", "apellido_alumno": "Rodríguez"},
+        json={
+            "id_alumno": 4,
+            "nombre_alumno": "Laura",
+            "apellido_alumno": "Rodríguez",
+        },
     )
     response = client.delete("/alumno/4")
     assert response.status_code == status.HTTP_200_OK
@@ -104,7 +136,8 @@ def test_obtener_alumno_por_id_vacio(client):
 
 def test_actualizar_alumno_inexistente(client):
     response = client.put(
-        "/alumno/1", json={"nombre_alumno": "Juan", "apellido_alumno": "Roberto"}
+        "/alumno/1",
+        json={"nombre_alumno": "Juan", "apellido_alumno": "Roberto"},
     )
     assert response.status_code == status.HTTP_404_NOT_FOUND
     assert response.json()["detail"] == "Alumno no encontrado"
