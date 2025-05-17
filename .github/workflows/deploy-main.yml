@@ -48,15 +48,11 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Obtener nombre de rama
-        id: vars
-        run: echo "BRANCH_NAME=${GITHUB_HEAD_REF}" >> $GITHUB_OUTPUT
-
       - name: Construir y subir imagen Docker
         uses: docker/build-push-action@v5
         with:
           context: .
           push: true
           tags: |
-            ${{ secrets.DOCKER_USERNAME }}/tp-devops-2025:${{ steps.vars.outputs.BRANCH_NAME }}
-            ${{ secrets.DOCKER_USERNAME }}/tp-devops-2025:pr-${{ github.event.pull_request.number }}
+            ${{ secrets.DOCKER_USERNAME }}/tp-devops-2025:main
+            ${{ secrets.DOCKER_USERNAME }}/tp-devops-2025:latest
