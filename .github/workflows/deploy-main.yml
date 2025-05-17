@@ -22,7 +22,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           
-      - name: Formatear código con black
+      - name: Chequeo de código con black
         run: black --check --line-length 79 .
 
       - name: Ejecutar tests

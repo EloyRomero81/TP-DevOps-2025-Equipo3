@@ -19,7 +19,7 @@ router = APIRouter()
 )
 def crear_alumno_materia(
     alumno_materia_request: ModeloCrearAlumnoMateria,
-):  # Se pedira un body con los datos definidos 
+):  # Se pedira un body con los datos definidos
     # en el modelo de crear alumno_materia
     buscarMateria(alumno_materia_request.id_materia)
     buscarAlumno(alumno_materia_request.id_alumno)

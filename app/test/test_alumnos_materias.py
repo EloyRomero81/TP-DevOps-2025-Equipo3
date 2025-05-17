@@ -234,8 +234,7 @@ def test_actualizar_inscripcion_inexistente(client):
     )
     assert response.status_code == status.HTTP_404_NOT_FOUND
     assert (
-        response.json()["detail"]
-        == "Inscripción alumno-materia no encontrada"
+        response.json()["detail"] == "Inscripción alumno-materia no encontrada"
     )
 
 

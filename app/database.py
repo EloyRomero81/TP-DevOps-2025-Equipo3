@@ -11,7 +11,7 @@ from peewee import (
 myDB = SqliteDatabase(
     "app/database.sqlite", pragmas={"foreign_keys": 1}
 )  # Se indica la BD con la que se trabajará y se enforza
-   # las restricciones de claves foráneas.
+# las restricciones de claves foráneas.
 db_prueba = SqliteDatabase(
     "file:memdb1?mode=memory&cache=shared",
     uri=True,
@@ -50,7 +50,7 @@ class Materia(BaseModel):
     id_profesor = ForeignKeyField(
         Profesor, backref="materia", column_name="id_profesor"
     )  # backref crea un acceso inverso desde Profesor hacia Materia.
-    # Peewee por defecto genera el nombre del campo como 
+    # Peewee por defecto genera el nombre del campo como
     # id_profesor_id en la base de datos, no como id_profesor.
     # Por eso se lo cambia con column_name.
 
