@@ -10,10 +10,7 @@ from app.database import (
     db_prueba,
     myDB,
 )
-from app.test.test_alumnos_materias import (
-    crearProfe,
-    crearMateria
-)
+from app.test.test_alumnos_materias import crearProfe, crearMateria
 from app.main import app
 
 

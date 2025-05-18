@@ -34,7 +34,7 @@ def index():
     return {"message": "Bienvenido a la API de notas de estudiantes!"}
 
 
-@app.get("/sentry-debug") # Error
+@app.get("/sentry-debug")  # Error
 async def trigger_error():
     division_by_zero = 1
     print(division_by_zero)
