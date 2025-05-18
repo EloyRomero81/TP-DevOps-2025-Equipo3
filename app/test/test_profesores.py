@@ -2,6 +2,7 @@ import pytest
 from fastapi.testclient import TestClient
 from starlette import status
 from app.database import Profesor, set_database, db_prueba, myDB
+from app.test.test_alumnos_materias import crearProfe
 from app.main import app
 
 
@@ -38,22 +39,8 @@ def test_crear_profesor(client):
 
 
 def test_obtener_todos_profesores(client):
-    client.post(
-        "/profesor",
-        json={
-            "id_profesor": 1,
-            "nombre_profesor": "Alberto",
-            "apellido_profesor": "Vilda",
-        },
-    )
-    client.post(
-        "/profesor",
-        json={
-            "id_profesor": 2,
-            "nombre_profesor": "Enrique",
-            "apellido_profesor": "Castillos",
-        },
-    )
+    crearProfe(client, 1, "Alberto", "Vilda")
+    crearProfe(client, 2, "Enrique", "Castillos")
     response = client.get("/profesores")
     assert response.status_code == status.HTTP_200_OK
     data = response.json()
@@ -64,14 +51,7 @@ def test_obtener_todos_profesores(client):
 
 
 def test_obtener_profesor_por_id(client):
-    client.post(
-        "/profesor",
-        json={
-            "id_profesor": 2,
-            "nombre_profesor": "Enrique",
-            "apellido_profesor": "Castillos",
-        },
-    )
+    crearProfe(client, 2, "Enrique", "Castillos")
     response = client.get("/profesor/2")
     assert response.status_code == status.HTTP_200_OK
     data = response.json()["__data__"]
@@ -80,14 +60,7 @@ def test_obtener_profesor_por_id(client):
 
 
 def test_actualizar_profesor(client):
-    client.post(
-        "/profesor",
-        json={
-            "id_profesor": 3,
-            "nombre_profesor": "Carlos",
-            "apellido_profesor": "Sosa",
-        },
-    )
+    crearProfe(client, 3, "Carlos", "Sosa")
     response = client.put(
         "/profesor/3",
         json={"nombre_profesor": "Marcelo", "apellido_profesor": "Dominguez"},
@@ -99,14 +72,7 @@ def test_actualizar_profesor(client):
 
 
 def test_eliminar_profesor(client):
-    client.post(
-        "/profesor",
-        json={
-            "id_profesor": 4,
-            "nombre_profesor": "Marcela",
-            "apellido_profesor": "Trailla",
-        },
-    )
+    crearProfe(client, 4, "Marcela", "Trailla")
     response = client.delete("/profesor/4")
     assert response.status_code == status.HTTP_200_OK
     assert response.json() == "Profesor eliminado"

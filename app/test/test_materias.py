@@ -10,6 +10,7 @@ from app.database import (
     db_prueba,
     myDB,
 )
+from app.test.test_alumnos_materias import crearProfe, crearMateria
 from app.main import app
 
 
@@ -24,28 +25,6 @@ def client():
     db_prueba.drop_tables([Materia, Profesor, Alumno_Materia, Alumno])
     db_prueba.close()
     set_database(myDB)  # Se restaura a la BD original
-
-
-def crearProfe(client, idProfe: int, nomProfe: str, apeProfe: str):
-    client.post(
-        "/profesor",
-        json={
-            "id_profesor": idProfe,
-            "nombre_profesor": nomProfe,
-            "apellido_profesor": apeProfe,
-        },
-    )
-
-
-def crearMateria(client, idMateria: int, nomMateria: str, idProfe: int):
-    client.post(
-        "/materia",
-        json={
-            "id_materia": idMateria,
-            "nombre_materia": nomMateria,
-            "id_profesor": idProfe,
-        },
-    )
 
 
 # Test CRUD
