@@ -9,6 +9,7 @@ from app.database import (
     db_prueba,
     myDB,
 )
+from app.test.test_alumnos_materias import crearAlumno
 from app.main import app
 
 
@@ -45,22 +46,8 @@ def test_crear_alumno(client):
 
 
 def test_obtener_todos_alumnos(client):
-    client.post(
-        "/alumno",
-        json={
-            "id_alumno": 1,
-            "nombre_alumno": "Juan",
-            "apellido_alumno": "Pérez",
-        },
-    )
-    client.post(
-        "/alumno",
-        json={
-            "id_alumno": 2,
-            "nombre_alumno": "Ana",
-            "apellido_alumno": "Gómez",
-        },
-    )
+    crearAlumno(client, 1, "Juan", "Pérez")
+    crearAlumno(client, 2, "Ana", "Gómez")
     response = client.get("/alumnos")
     assert response.status_code == status.HTTP_200_OK
     data = response.json()
@@ -71,14 +58,7 @@ def test_obtener_todos_alumnos(client):
 
 
 def test_obtener_alumno_por_id(client):
-    client.post(
-        "/alumno",
-        json={
-            "id_alumno": 2,
-            "nombre_alumno": "Ana",
-            "apellido_alumno": "Gómez",
-        },
-    )
+    crearAlumno(client, 2, "Ana", "Gómez")
     response = client.get("/alumno/2")
     assert response.status_code == status.HTTP_200_OK
     data = response.json()["__data__"]
@@ -87,14 +67,7 @@ def test_obtener_alumno_por_id(client):
 
 
 def test_actualizar_alumno(client):
-    client.post(
-        "/alumno",
-        json={
-            "id_alumno": 3,
-            "nombre_alumno": "Carlos",
-            "apellido_alumno": "Sosa",
-        },
-    )
+    crearAlumno(client, 3, "Carlos", "Sosa")
     response = client.put(
         "/alumno/3",
         json={"nombre_alumno": "Carlos A.", "apellido_alumno": "Sosa B."},
@@ -106,14 +79,7 @@ def test_actualizar_alumno(client):
 
 
 def test_eliminar_alumno(client):
-    client.post(
-        "/alumno",
-        json={
-            "id_alumno": 4,
-            "nombre_alumno": "Laura",
-            "apellido_alumno": "Rodríguez",
-        },
-    )
+    crearAlumno(client, 4, "Laura", "Rodríguez")
     response = client.delete("/alumno/4")
     assert response.status_code == status.HTTP_200_OK
     assert response.json() == "Alumno eliminado"
