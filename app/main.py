@@ -31,7 +31,7 @@ app.include_router(alumno_materia.router)
 
 @app.get("/")
 def index():
-    return {"message": "Bienvenido a la API de notas de estudiantes!"}
+    return {"message": "Bienvenido a la API de notas de estudiantes"}
 
 
 @app.get("/sentry-debug")  # Error
