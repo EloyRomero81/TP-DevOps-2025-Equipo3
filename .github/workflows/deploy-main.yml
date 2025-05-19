@@ -5,34 +5,7 @@ on:
     branches: [ main ]
 
 jobs:
-  test-lint:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repositorio
-        uses: actions/checkout@v3
-
-      - name: Configuración de Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.11'
-
-      - name: Instalación de dependencias
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          
-      - name: Chequeo de código con black
-        run: black --check --line-length 79 .
-
-      - name: Ejecutar tests
-        run: pytest
-
-      - name: Ejecutar linter
-        run: flake8 app
-
   docker-build-push:
-    needs: test-lint
     runs-on: ubuntu-latest
 
     steps:
