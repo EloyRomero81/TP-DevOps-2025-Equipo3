@@ -31,5 +31,5 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Llamar al Deploy Hook de Render
+      - name: Llamar al Deploy Hook de Render con con imgURL precodificado
         run: curl -X POST "${{ secrets.RENDER_DEPLOY_HOOK_URL }}"
